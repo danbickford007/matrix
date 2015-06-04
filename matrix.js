@@ -1,4 +1,5 @@
-$.fn.matrix = function(id){
+$.fn.matrix = function(){
+  var id = this[0].id;
   var c = document.getElementById(id);
   c.style.display = "block";
   c.style.height = '100%';
@@ -11,22 +12,22 @@ $.fn.matrix = function(id){
   characters = characters.split("");
   var font_size = 10;
   var columns = c.width/font_size; 
-  var drops = [];
+  var runs = [];
   for(var x = 0; x < columns; x++)
-    drops[x] = 1; 
+    runs[x] = 1; 
   function draw()
   {
     ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
     ctx.fillRect(0, 0, c.width, c.height);
     ctx.fillStyle = "#0F0"; 
     ctx.font = font_size + "px arial";
-    for(var i = 0; i < drops.length; i++)
+    for(var i = 0; i < runs.length; i++)
     {
       var text = characters[Math.floor(Math.random()*characters.length)];
-      ctx.fillText(text, i*font_size, drops[i]*font_size);
-      if(drops[i]*font_size > c.height && Math.random() > 0.975)
-        drops[i] = 0;
-      drops[i]++;
+      ctx.fillText(text, i*font_size, runs[i]*font_size);
+      if(runs[i]*font_size > c.height && Math.random() > 0.975)
+        runs[i] = 0;
+      runs[i]++;
     }
   }
   setInterval(draw, 33);
